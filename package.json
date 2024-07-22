@@ -1,0 +1,29 @@
+{
+  "name": "project-root",
+  "version": "1.0.0",
+  "description": "This project is a simple HTML page that interacts with GREEN-API methods. It demonstrates how to use various API calls using JavaScript and Axios.",
+  "main": "script.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha tests/test.mjs",
+    "build": "echo 'No build steps defined'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vladislav-php/green-api-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vladislav-php/green-api-project/issues"
+  },
+  "homepage": "https://github.com/Vladislav-php/green-api-project#readme",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "chai": "^5.1.1",
+    "mocha": "^10.7.0"
+  }s
+}
