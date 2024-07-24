@@ -10,11 +10,15 @@ async function fetchAPI(url, method = 'GET', data = null) {
 function validateForm() {
     const idInstance = document.getElementById('idInstance').value;
     const apiToken = document.getElementById('apiToken').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const message = document.getElementById('message').value;
+    const url = document.getElementById('url').value;
+    
     if (!idInstance || !apiToken) {
         alert('Both idInstance and ApiTokenInstance are required!');
         return false;
     }
-    return { idInstance, apiToken };
+    return { idInstance, apiToken, phoneNumber, message, url };
 }
 
 function getSettings() {
@@ -34,27 +38,31 @@ function getStateInstance() {
 }
 
 function sendMessage() {
-    const { idInstance, apiToken } = validateForm();
-    if (idInstance && apiToken) {
+    const { idInstance, apiToken, phoneNumber, message } = validateForm();
+    if (idInstance && apiToken && phoneNumber && message) {
         const url = `https://api.green-api.com/waInstance${idInstance}/sendMessage/${apiToken}`;
         const data = {
-            chatId: "123456789@c.us", // Replace with actual chat ID
-            message: "Hello from GREEN-API"
+            chatId: `${phoneNumber}@c.us`,
+            message: message
         };
         fetchAPI(url, 'POST', data);
+    } else {
+        alert('Phone number and message are required!');
     }
 }
 
 function sendFileByUrl() {
-    const { idInstance, apiToken } = validateForm();
-    if (idInstance && apiToken) {
-        const url = `https://api.green-api.com/waInstance${idInstance}/sendFileByUrl/${apiToken}`;
+    const { idInstance, apiToken, phoneNumber, url } = validateForm();
+    if (idInstance && apiToken && phoneNumber && url) {
+        const apiUrl = `https://api.green-api.com/waInstance${idInstance}/sendFileByUrl/${apiToken}`;
         const data = {
-            chatId: "123456789@c.us", // Replace with actual chat ID
-            urlFile: "https://example.com/file.pdf",
-            fileName: "file.pdf",
-            caption: "Here is your file"
+            chatId: `${phoneNumber}@c.us`,
+            urlFile: url,
+            fileName: url.split('/').pop(),
+            caption: 'Here is your file'
         };
-        fetchAPI(url, 'POST', data);
+        fetchAPI(apiUrl, 'POST', data);
+    } else {
+        alert('Phone number and URL are required!');
     }
 }
